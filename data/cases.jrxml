@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FM-6144_Cases_to_be_processed" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bc977104-3569-4a29-a728-52decffb65d9">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="report_header" backcolor="#99CCFF">
+		<box>
+			<topPen lineWidth="0.5"/>
+			<leftPen lineWidth="0.5"/>
+			<bottomPen lineWidth="0.5"/>
+			<rightPen lineWidth="0.5"/>
+		</box>
+	</style>
+	<style name="report_cell" backcolor="#FFFFFF">
+		<box leftPadding="3" rightPadding="3">
+			<topPen lineWidth="0.5"/>
+			<leftPen lineWidth="0.5"/>
+			<bottomPen lineWidth="0.5"/>
+			<rightPen lineWidth="0.5"/>
+		</box>
+	</style>
+	<style name="report_footer">
+		<box leftPadding="3" rightPadding="3">
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<parameter name="REPORT_START_DATE" class="java.util.Date">
+		<property name="required" value="true"/>
+		<property name="dateLessEquals" value="REPORT_END_DATE"/>
+		<parameterDescription><![CDATA[Start date]]></parameterDescription>
+	</parameter>
+	<parameter name="REPORT_END_DATE" class="java.util.Date">
+		<property name="required" value="true"/>
+		<parameterDescription><![CDATA[End date]]></parameterDescription>
+	</parameter>
+	<parameter name="CASE_ENTITY" class="java.lang.String">
+		<property name="ru.bpc.dictionary.type" value="SINGLE"/>
+		<property name="ru.bpc.dictionary.name" value="INVESTIGATION_ENTITIES_NAMES"/>
+		<property name="ru.bpc.dictionary.class" value="FRAUD_TYPE_DICT"/>
+		<parameterDescription><![CDATA[Entity type]]></parameterDescription>
+	</parameter>
+	<parameter name="REPORT_PRIVATE_SCHEME" class="java.util.Collection">
+		<property name="required" value="true"/>
+		<property name="ru.bpc.dictionary.type" value="LIST"/>
+		<property name="ru.bpc.dictionary.name" value="PRIVATE_SCHEME"/>
+		<property name="ru.bpc.dictionary.class" value="PRIVATE_DICTIONARY"/>
+		<parameterDescription><![CDATA[Private Scheme]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT TO_CHAR('12/2020') as CASE_DATE, 5 as CASE_NUMBER
+				 FROM DUAL]]>
+	</queryString>
+	<field name="CASE_DATE" class="java.lang.String"/>
+	<field name="CASE_NUMBER" class="java.math.BigDecimal"/>
+	<variable name="sum" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{CASE_NUMBER}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="10" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="c71b3497-f1d2-440d-a02b-a01e62078ff6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cases to be processed]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="15" width="110" height="15" uuid="e4fa4c63-10f5-441f-aa7c-84d66f975ed7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Private scheme:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="15" width="170" height="15" uuid="4bbddae2-88d5-4d99-8a55-0aa86078606f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{REPORT_PRIVATE_SCHEME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="110" height="15" uuid="e4fa4c63-10f5-441f-aa7c-84d66f975ed7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entity type:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="30" width="170" height="15" uuid="4bbddae2-88d5-4d99-8a55-0aa86078606f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{CASE_ENTITY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="15" uuid="5baf48d4-03a6-491a-8119-e841ac956032"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date from:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="60" y="0" width="110" height="15" uuid="0b8bd520-2e25-4afc-aa70-a7a2d9c8c8ff">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($P{REPORT_START_DATE})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="215" height="15" uuid="8785930a-ddd5-4c5f-b117-e2ab82a2b18b">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="170" y="0" width="60" height="15" uuid="67793b7f-0d3f-4844-9f54-b299861ed1a2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date to:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="230" y="0" width="110" height="15" uuid="d168bbc2-ab05-4274-8ef6-076ecf44b53a">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($P{REPORT_END_DATE})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement style="report_header" mode="Opaque" x="280" y="0" width="275" height="23" uuid="3b8397a8-e9f3-4c7e-baa1-c420dd5784f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cases to be processed]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="report_header" mode="Opaque" x="0" y="0" width="280" height="23" uuid="e8583798-9107-46e4-aa02-2c9faf580748"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Report Date]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement style="report_cell" x="0" y="0" width="280" height="15" uuid="d400452b-e343-4c47-9594-9b84d6a78ce8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CASE_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="report_cell" x="280" y="0" width="275" height="15" uuid="06c46831-86b2-4bb5-b24d-b2dba8a1423c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CASE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="20">
+			<textField isBlankWhenNull="true">
+				<reportElement style="report_footer" x="480" y="0" width="75" height="15" uuid="3df19232-9eb0-4338-bae1-fd2d88a0e7fa"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sum}==null?0:$V{sum}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="report_footer" x="280" y="0" width="200" height="15" uuid="9a47a131-681b-4c92-9f5e-4a5a1d146b37"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total count:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
