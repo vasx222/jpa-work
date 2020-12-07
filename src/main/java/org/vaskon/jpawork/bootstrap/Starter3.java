@@ -2,9 +2,12 @@ package org.vaskon.jpawork.bootstrap;
 
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.fill.JRSwapFileVirtualizer;
 import net.sf.jasperreports.engine.util.JRSwapFile;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.orm.jpa.EntityManagerFactoryInfo;
@@ -47,7 +50,8 @@ public class Starter3 implements CommandLineRunner {
         }
     }
 
-    String pathForSaving = "D:\\prog\\java\\progs\\work\\jpa-work\\data\\cases.pdf";
+    String pathForSavingPdf = "D:\\prog\\java\\progs\\work\\jpa-work\\data\\cases.pdf";
+    String pathForSavingXls = "D:\\prog\\java\\progs\\work\\jpa-work\\data\\cases.xls";
     String pathForPattern = "D:\\prog\\java\\progs\\work\\jpa-work\\data\\cases.jrxml";
     String pathForSwapFile = "D:\\prog\\java\\progs\\work\\jpa-work\\data";
 
@@ -66,10 +70,10 @@ public class Starter3 implements CommandLineRunner {
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,
                 ((EntityManagerFactoryInfo)em.getEntityManagerFactory()).getDataSource().getConnection());
-        JasperExportManager.exportReportToPdfFile(jasperPrint, pathForSaving);
-    }
-
-    public static void main(String[] args) {
-
+//        JasperExportManager.exportReportToPdfFile(jasperPrint, pathForSavingPdf);
+        final JRXlsExporter exporter = new JRXlsExporter();
+        exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pathForSavingXls));
+        exporter.exportReport();
     }
 }

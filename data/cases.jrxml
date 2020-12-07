@@ -98,7 +98,7 @@
 				<textFieldExpression><![CDATA[$P{CASE_ENTITY}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="0" width="60" height="15" uuid="5baf48d4-03a6-491a-8119-e841ac956032"/>
+				<reportElement x="0" y="0" width="70" height="15" uuid="5baf48d4-03a6-491a-8119-e841ac956032"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
