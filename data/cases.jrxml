@@ -105,7 +105,7 @@
 				<text><![CDATA[Date from:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="60" y="0" width="110" height="15" uuid="0b8bd520-2e25-4afc-aa70-a7a2d9c8c8ff">
+				<reportElement x="70" y="0" width="100" height="15" uuid="0b8bd520-2e25-4afc-aa70-a7a2d9c8c8ff">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle"/>

@@ -70,7 +70,7 @@ public class Starter3 implements CommandLineRunner {
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,
                 ((EntityManagerFactoryInfo)em.getEntityManagerFactory()).getDataSource().getConnection());
-//        JasperExportManager.exportReportToPdfFile(jasperPrint, pathForSavingPdf);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathForSavingPdf);
         final JRXlsExporter exporter = new JRXlsExporter();
         exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
         exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pathForSavingXls));
